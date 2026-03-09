@@ -15,10 +15,10 @@ import java.util.List;
 
 @Service
 public class ApplicationService {
-    private ApplicationRepository applicationRepository;
-    private JobRepository jobRepository;
-    private UserRepository userRepository;
-    private ApplicationMapper  applicationMapper;
+    private final ApplicationRepository applicationRepository;
+    private final JobRepository jobRepository;
+    private final UserRepository userRepository;
+    private final ApplicationMapper  applicationMapper;
 
     public ApplicationService(ApplicationRepository applicationRepository,
                               JobRepository jobRepository,

@@ -10,8 +10,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
-    private UserService userService;
-    private JobService jobService;
+    private final UserService userService;
+    private final JobService jobService;
 
     public AdminController(UserService userService, JobService jobService) {
         this.userService = userService;

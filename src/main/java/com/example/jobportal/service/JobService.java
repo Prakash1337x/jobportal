@@ -16,9 +16,9 @@ import java.util.List;
 @Service
 public class JobService {
     public JobRepository jobRepository;
-    private JobMapper jobMapper;
-    private CompanyRepository  companyRepository;
-    private CategoryRepository categoryRepository;
+    private final JobMapper jobMapper;
+    private final CompanyRepository  companyRepository;
+    private final CategoryRepository categoryRepository;
 
     public JobService(JobRepository jobRepository, JobMapper jobMapper,
                       CompanyRepository companyRepository, CategoryRepository categoryRepository) {
@@ -91,12 +91,13 @@ public class JobService {
                 .orElseThrow(()->new RuntimeException("Company Not Found"));
         Category category = categoryRepository.findById(dto.getCategoryId())
                 .orElseThrow(()->new RuntimeException("Category not Found"));
-        Job job = jobMapper.toEntity(dto);
-        job.setCompany(company);
-        job.setCategory(category);
-        Job saved = jobRepository.save(job);
-        return jobMapper.toDTO(saved);
 
+        jobMapper.updateJob(existing, dto);
+        existing.setCompany(company);
+        existing.setCategory(category);
+
+        Job saved = jobRepository.save(existing);
+        return jobMapper.toDTO(saved);
     }
 
     //GetAll

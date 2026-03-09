@@ -11,7 +11,7 @@ public class ApplicationResponseDTO {
     private Long id;
 
     @JsonProperty("jobtitle")
-    private Long jobTitle;
+    private String jobTitle;
 
     @JsonProperty("applicantname")
     private String applicantName;

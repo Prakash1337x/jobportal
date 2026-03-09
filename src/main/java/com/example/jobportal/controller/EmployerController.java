@@ -16,9 +16,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/employer")
 public class EmployerController {
-    private CompanyService companyService;
-    private JobService jobService;
-    private ApplicationService applicationService;
+    private final CompanyService companyService;
+    private final JobService jobService;
+    private final ApplicationService applicationService;
 
     public EmployerController(CompanyService companyService, JobService jobService,
                               ApplicationService applicationService) {

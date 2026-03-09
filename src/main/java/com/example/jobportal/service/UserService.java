@@ -13,9 +13,9 @@ import java.util.List;
 
 @Service
 public class UserService {
-    private UserRepository userRepository;
-    private PasswordEncoder passwordEncoder;
-    private UserMapper userMapper;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final UserMapper userMapper;
 
     public UserService(UserRepository userRepository,
                        PasswordEncoder passwordEncoder,

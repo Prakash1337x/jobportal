@@ -1,6 +1,5 @@
 package com.example.jobportal.security;
 
-import com.example.jobportal.entity.User;
 import com.example.jobportal.repository.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -8,7 +7,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -19,8 +17,8 @@ import java.util.List;
 @Component
 public class JwtFilter extends OncePerRequestFilter {
 
-    private JwtUtil jwtUtil;
-    private UserRepository userRepository;
+    private final JwtUtil jwtUtil;
+    private final UserRepository userRepository;
 
     public JwtFilter(JwtUtil jwtUtil, UserRepository userRepository) {
         this.jwtUtil = jwtUtil;

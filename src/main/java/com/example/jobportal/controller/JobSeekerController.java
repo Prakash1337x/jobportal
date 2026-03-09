@@ -13,8 +13,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/jobseeker")
 public class JobSeekerController {
-    private ApplicationService applicationService;
-    private JobService jobService;
+    private final ApplicationService applicationService;
+    private final JobService jobService;
 
     public JobSeekerController(ApplicationService applicationService,  JobService jobService) {
         this.applicationService = applicationService;
