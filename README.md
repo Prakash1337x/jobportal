@@ -2,7 +2,7 @@
 
 A backend REST API for a Job Portal where employers can post jobs and job seekers can search and apply. The system supports role-based access for Admin, Employer, and Job Seeker.
 
-## Technologies Used
+## Tech Stack
 
 - Java
 - Spring Boot
@@ -11,7 +11,6 @@ A backend REST API for a Job Portal where employers can post jobs and job seeker
 - Postgres
 - Spring Data JPA
 - Swagger / OpenAPI
-- Maven
 
 ## Features
 
@@ -22,3 +21,20 @@ A backend REST API for a Job Portal where employers can post jobs and job seeker
 - Job Search
 - Job Application Management
 - API Documentation with Swagger
+
+## Project Structure
+
+src/main/java
+ ├── controller
+ ├── service
+ ├── repository
+ ├── dto
+ ├── mapper
+ ├── security
+
+## API Documentation
+
+Swagger UI:
+
+http://localhost:8080/swagger-ui/index.html
+
