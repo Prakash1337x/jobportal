@@ -9,10 +9,12 @@ import com.example.jobportal.mapper.JobMapper;
 import com.example.jobportal.service.ApplicationService;
 import com.example.jobportal.service.CompanyService;
 import com.example.jobportal.service.JobService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@SecurityRequirement(name = "bearerAuth")
 @RestController
 @RequestMapping("/employer")
 public class EmployerController {

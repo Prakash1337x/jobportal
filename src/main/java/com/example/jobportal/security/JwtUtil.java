@@ -40,6 +40,4 @@ public class JwtUtil {
                 .getBody()
                 .get("role").toString();
     }
-
-
 }

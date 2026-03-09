@@ -3,10 +3,12 @@ package com.example.jobportal.controller;
 import com.example.jobportal.entity.User;
 import com.example.jobportal.service.JobService;
 import com.example.jobportal.service.UserService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@SecurityRequirement(name = "bearerAuth")
 @RestController
 @RequestMapping("/admin")
 public class AdminController {

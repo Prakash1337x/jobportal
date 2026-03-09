@@ -4,12 +4,14 @@ import com.example.jobportal.dto.ApplicationRequestDTO;
 import com.example.jobportal.dto.ApplicationResponseDTO;
 import com.example.jobportal.service.ApplicationService;
 import com.example.jobportal.service.JobService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.web.bind.annotation.*;
 import com.example.jobportal.dto.JobResponseDTO;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
+@SecurityRequirement(name = "bearerAuth")
 @RestController
 @RequestMapping("/jobseeker")
 public class JobSeekerController {
