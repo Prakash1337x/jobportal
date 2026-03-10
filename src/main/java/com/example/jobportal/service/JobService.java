@@ -5,6 +5,7 @@ import com.example.jobportal.dto.JobResponseDTO;
 import com.example.jobportal.entity.Category;
 import com.example.jobportal.entity.Company;
 import com.example.jobportal.entity.Job;
+import com.example.jobportal.exception.ResourceNotFoundException;
 import com.example.jobportal.mapper.JobMapper;
 import com.example.jobportal.repository.CategoryRepository;
 import com.example.jobportal.repository.CompanyRepository;
@@ -74,9 +75,9 @@ public class JobService {
 
         Job job = jobMapper.toEntity(dto);
         Company company = companyRepository.findById(dto.getCompanyId())
-                .orElseThrow(()-> new RuntimeException("Company Not Found"));
+                .orElseThrow(()-> new ResourceNotFoundException("Company Not Found"));
         Category category = categoryRepository.findById(dto.getCategoryId())
-                .orElseThrow(()->new RuntimeException("Category not Found"));
+                .orElseThrow(()->new ResourceNotFoundException("Category not Found"));
         job.setCompany(company);
         job.setCategory(category);
         Job saved = jobRepository.save(job);
@@ -86,11 +87,11 @@ public class JobService {
     //Update job
     public JobResponseDTO updateJob(Long jobId, JobCreateDTO dto){
         Job existing = jobRepository.findById(jobId)
-                .orElseThrow(()->new RuntimeException("job not found"));
+                .orElseThrow(()->new ResourceNotFoundException("Job not found"));
         Company company = companyRepository.findById(dto.getCompanyId())
-                .orElseThrow(()->new RuntimeException("Company Not Found"));
+                .orElseThrow(()->new ResourceNotFoundException("Company Not Found"));
         Category category = categoryRepository.findById(dto.getCategoryId())
-                .orElseThrow(()->new RuntimeException("Category not Found"));
+                .orElseThrow(()->new ResourceNotFoundException("Category not Found"));
 
         jobMapper.updateJob(existing, dto);
         existing.setCompany(company);

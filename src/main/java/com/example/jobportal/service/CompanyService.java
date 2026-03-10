@@ -4,6 +4,7 @@ import com.example.jobportal.dto.CompanyCreateDTO;
 import com.example.jobportal.dto.CompanyResponseDTO;
 import com.example.jobportal.entity.Company;
 import com.example.jobportal.entity.User;
+import com.example.jobportal.exception.BadRequestException;
 import com.example.jobportal.mapper.ComapnyMapper;
 import com.example.jobportal.repository.CompanyRepository;
 import com.example.jobportal.repository.UserRepository;
@@ -25,7 +26,7 @@ public class CompanyService {
     //Create company
     public CompanyResponseDTO createCompany(CompanyCreateDTO dto) {
         User employer = userRepository.findById(dto.getEmployerId())
-                .orElseThrow(()->new RuntimeException("Employer not found"));
+                .orElseThrow(()->new BadRequestException("Employer doesn't exist!.."));
         Company company = comapnyMapper.toEntity(dto);
         company.setEmployer(employer);
         Company saved = companyRepository.save(company);
@@ -35,9 +36,9 @@ public class CompanyService {
     //View Company
     public CompanyResponseDTO getCompanyByEmployerId(Long employeeId) {
         User employer = userRepository.findById(employeeId)
-                .orElseThrow(()->new RuntimeException("Employee not found"));
+                .orElseThrow(()->new BadRequestException("Employee doesn't exist!.."));
         Company company = companyRepository.findByEmployer(employer)
-                .orElseThrow(()->new RuntimeException("Company not found"));
+                .orElseThrow(()->new BadRequestException("Company doesn't exist!.."));
         return comapnyMapper.toDTO(company);
     }
 }

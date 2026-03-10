@@ -2,6 +2,7 @@ package com.example.jobportal.service;
 
 import com.example.jobportal.dto.LoginRequestDTO;
 import com.example.jobportal.entity.User;
+import com.example.jobportal.exception.BadRequestException;
 import com.example.jobportal.repository.UserRepository;
 import com.example.jobportal.security.JwtUtil;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,9 +23,9 @@ public class AuthService {
     //Login
     public String login(LoginRequestDTO request) {
         User user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(()->new RuntimeException("User not found"));
+                .orElseThrow(()->new BadRequestException("Invalid Login Request!.."));
         if(!passwordEncoder.matches(request.getPassword(), user.getPassword())){
-            throw new RuntimeException("Incorrect password");
+            throw new BadRequestException("Incorrect password");
         }
         return jwtUtil.generateToken(user);
     }

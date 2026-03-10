@@ -6,6 +6,7 @@ import com.example.jobportal.entity.Application;
 import com.example.jobportal.entity.ApplicationStatus;
 import com.example.jobportal.entity.Job;
 import com.example.jobportal.entity.User;
+import com.example.jobportal.exception.ResourceNotFoundException;
 import com.example.jobportal.mapper.ApplicationMapper;
 import com.example.jobportal.repository.ApplicationRepository;
 import com.example.jobportal.repository.JobRepository;
@@ -33,9 +34,9 @@ public class ApplicationService {
     //Apply Job
     public ApplicationResponseDTO applyJob(ApplicationRequestDTO dto) {
         Job job = jobRepository.findById(dto.getJobId())
-                .orElseThrow(()->new RuntimeException("Job Not Found!.."));
+                .orElseThrow(()-> new  ResourceNotFoundException("Job not found"));
         User user = userRepository.findById(dto.getUserId())
-                .orElseThrow(()->new RuntimeException("User Not Found!.."));
+                .orElseThrow(()->new ResourceNotFoundException("User Not Found!.."));
 
         Application application = applicationMapper.toEntity(dto);
         application.setJobSeeker(user);
@@ -47,7 +48,7 @@ public class ApplicationService {
     //view Applications
     public List<ApplicationResponseDTO> getApplicationByJob(Long jobId) {
         Job job = jobRepository.findById(jobId)
-                .orElseThrow(()->new RuntimeException("Job Not Found!.."));
+                .orElseThrow(()->new ResourceNotFoundException("Job Not Found!.."));
         return applicationRepository.findByJob(job)
                 .stream()
                 .map(applicationMapper::toDTO)
@@ -57,7 +58,7 @@ public class ApplicationService {
     // view applied jobs
     public List<ApplicationResponseDTO> getUserApplications(Long userId) {
         User user = userRepository.findById(userId)
-                .orElseThrow(()->new RuntimeException("User Not Found!.."));
+                .orElseThrow(()->new ResourceNotFoundException("User Not Found!.."));
         return applicationRepository.findByJobSeeker(user)
                 .stream()
                 .map(applicationMapper::toDTO)
@@ -67,7 +68,7 @@ public class ApplicationService {
     //Status Update
     public ApplicationResponseDTO updateStatus(Long applicationId, ApplicationStatus applicationStatus) {
         Application app = applicationRepository.findById(applicationId)
-                .orElseThrow(()->new RuntimeException("Application Not Found!.."));
+                .orElseThrow(()->new ResourceNotFoundException("Application Not Found!.."));
         app.setStatus(applicationStatus);
         Application saved = applicationRepository.save(app);
         return applicationMapper.toDTO(saved);

@@ -1,5 +1,6 @@
 package com.example.jobportal.security;
 
+import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -31,8 +32,8 @@ public class JwtFilter extends OncePerRequestFilter {
            String email = jwtUtil.extractEmail(token);
            String role = jwtUtil.extractRole(token);
 
-            System.out.println("Token Role Claim: " + role);
-            System.out.println("Token Email: " + email);
+//            System.out.println("Token Role Claim: " + role);
+//            System.out.println("Token Email: " + email);
 
            try {
                if(email != null && role != null){
@@ -40,8 +41,9 @@ public class JwtFilter extends OncePerRequestFilter {
                            email, null, List.of(new SimpleGrantedAuthority(role)));
                    SecurityContextHolder.getContext().setAuthentication(authToken);
                }
-           } catch (Exception e) {
-               System.out.println("Inavlid or Token Expired");
+           } catch (JwtException ex) {
+               response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+               response.getWriter().write("Invalid or expired Token");
            }
         }
         filterChain.doFilter(request, response);
