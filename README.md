@@ -24,7 +24,7 @@ A backend REST API for a Job Portal where employers can post jobs and job seeker
 
 ## Project Structure
 
-Controller ──> Service ──> Repository ──> DTO ──> Mapper ──> Security ──> Model
+Controller ──> Service ──> Repository ──> DTO ──> Mapper ──> Security ──> Model ──> Exception 
 
 ## API Documentation
 
